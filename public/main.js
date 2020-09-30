@@ -2,8 +2,6 @@ const socket = io();
 var loaded = false;
 var instance = null;
 
-
-
 socket.on("chat", function (data) { // recieve chat from server
   if (data.instance == instance){
     renderChat(data);
@@ -39,7 +37,7 @@ function renderChat(data){
   newDiv.className = 'chat';
   newDiv.style.left = data.xPos + "px";
   newDiv.style.top = data.yPos + "px";
-  newDiv.innerHTML = data.name;
+  newDiv.innerHTML = "<button>x</button> " + data.name;
   document.getElementById("container").appendChild(newDiv);
 }
 function createChat(event) {
@@ -49,7 +47,7 @@ function createChat(event) {
     instance: instance,
     xPos: event.clientX, 
     yPos: event.clientY,
-    name: 'name test'
+    name: document.getElementById('name-text').value
   });
 }
 
@@ -62,14 +60,20 @@ function makeid() {
   }
   return result;
 }
+function removeDiv(){
+  alert("test");
+  $(this).parent('div').remove();
+}
 
-$('#container').on('click', function(e) {
-  if(e.target != this) return;
+$('.container').on('click', function(e) {
   createChat(e);
-}).on('click', 'div', function(e) {
-  e.stopPropagation();
 });
-
+$('.container').on('click', '.chat', function(e) {
+  //chat click
+});
+$('.container').on('click', '.chat button', function(e) {
+  // button click
+});
 $('#create-btn').on('click', function(e) {
   switchInstance(makeid())
 });
@@ -77,3 +81,6 @@ $('#join-btn').on('click', function(e) {
   var id = prompt("Enter Room ID", "12 char ID");
   switchInstance(id);
 });
+function removeDiv(){
+    $(this).parent('div').remove();
+}
