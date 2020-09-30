@@ -15,15 +15,24 @@ app.use(express.static("public"));
 // Socket setup
 const io = socket(server);
 
-const chats = [];
+const chats = {};
 
 io.on("connection", function (socket) {
   console.log("Made socket connection");
-  io.emit("existing data", chats);
+  
+
+  socket.on("retrieve", function(data) {
+    console.log('Sending existing instance');
+    io.emit("existing data", chats[data]);
+  });
 
   socket.on("new chat", function(data) {
-    console.log(data);
-    chats.push(data);
+    var instance = data.instance;
+    if (!(instance in chats)){
+      chats[instance] = [];
+    }
+    chats[instance].push(data);
     io.emit("chat", data);
   });
+
 });
