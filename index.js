@@ -30,9 +30,40 @@ io.on("connection", function (socket) {
     var instance = data.instance;
     if (!(instance in chats)){
       chats[instance] = [];
+      setTimeout(function () {
+        removeInstance(instance);
+      }, 864000);
     }
     chats[instance].push(data);
     io.emit("chat", data);
   });
 
+  socket.on("del chat", function(data) {
+    var instance = data[1];
+    var id = data[0];
+    for (var x in chats[instance]){
+      if (chats[instance][x].id == id){
+        delete chats[instance][x]
+      }
+    }
+    io.emit("unchat", [id, instance]);
+  });
+
+  socket.on("update chat", function(data) {
+    var instance = data[1];
+    var id = data[0];
+    for (var x in chats[instance]){
+      if (chats[instance][x].id == id){
+        chats[instance][x].content = data[2];
+      }
+    }
+    io.emit("chat message", data);
+  });
+
+  
+
 });
+function removeInstance(id){
+  delete chats[id];
+  console.log("removed ID: " + id);
+}

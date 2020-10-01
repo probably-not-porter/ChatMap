@@ -28,12 +28,39 @@ html, body{
     z-index:3;
 }
 .chat{
-    background: rgba(255,255,255,0.2);
-    width: 100px;
-    height: 100px;
     position: absolute;
     z-index: 10;
+    width: 200px;
+}
+.chat button{
+    position: absolute;
+    z-index: 11;
+    float: right;
 }
 button:hover{
     color: red;
+}
+
+.data-id{
+    font-size:0px;
+}
+.chat-content{
+    background: rgba(255,255,255,0.4);
+    color: black;
+    padding:3px;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: absolute;
+    top:15px;
+    cursor: pointer;
+    display:block;
+    word-wrap:break-word;
+}
+
+.chat-input{
+    width:0;
+    overflow: hidden;
+}
+.edit-chat{
+    background: rgba(255,255,255,0.7) !important;
 }
