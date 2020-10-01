@@ -54,7 +54,7 @@ button:hover{
     border-radius: 10px;
     margin-top: 20px;
     position: absolute;
-    top:15px;
+    top:10px;
     cursor: pointer;
     display:block;
     word-wrap:break-word;
@@ -66,4 +66,10 @@ button:hover{
 }
 .edit-chat{
     background: rgba(255,255,255,0.7) !important;
+}
+.chat button{
+    visibility: hidden;
+}
+.chat:hover button{
+    visibility: visible;
 }

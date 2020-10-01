@@ -64,9 +64,10 @@ $( document ).ready(function() {
     newDiv.style.left = data.xPos + "px";
     newDiv.style.top = data.yPos + "px";
     newDiv.innerHTML = "<button>x</button>"; 
+    
     newDiv.innerHTML += "<span class='data-id'>" + data.id + "</span>"; 
     newDiv.innerHTML += "<span class='chat-content'>" + data.content + "</span>";
-    newDiv.innerHTML += data.name;
+    newDiv.innerHTML += "<span class='data-name'>" + data.name + "</span>"; 
     document.getElementById("container").appendChild(newDiv);
   }
   function createChat(event) {
