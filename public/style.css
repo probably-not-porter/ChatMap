@@ -4,6 +4,7 @@ html, body{
     margin:0;
     padding: 0;
     position: absolute;
+    color: white;
 }
 .container{
     width: 100%;
@@ -12,13 +13,15 @@ html, body{
     position: absolute;
     z-index: 2;
 }
-#click-panel{
+#start-page{
     position:absolute;
     top:0;
     left:0;
     width: 100%;
     height: 100%;
-    z-index:1;
+    background: black;
+    z-index:30;
+    display: none;
 }
 #panel{
     background: gray;

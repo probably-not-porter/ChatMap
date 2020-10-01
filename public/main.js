@@ -3,6 +3,16 @@ $( document ).ready(function() {
   var loaded = false;
   var instance = null;
 
+  if (window.location.search.length != 0){
+    console.log('has room')
+    const queryString = window.location.search;
+    console.log(queryString);
+    switchInstance(queryString.slice(1));
+  }else{
+    console.log('no room')
+    document.getElementById("start-page").style.display = 'inline';
+  }
+
   socket.on("chat", function (data) { // recieve chat from server
     if (data.instance == instance){
       renderChat(data);
@@ -35,7 +45,7 @@ $( document ).ready(function() {
     loaded = false;
     clearContainer();
     instance = n;
-    document.getElementById("room").innerHTML = "Room " + instance;
+    document.getElementById('room-num').innerHTML = 'room ID: ' + n;
     socket.emit("retrieve", instance);
   }
 
@@ -119,11 +129,10 @@ $( document ).ready(function() {
     removeChat(e.target);
   });
   $('#create-btn').on('click', function(e) {
-    switchInstance(makeid(12))
-  });
-  $('#join-btn').on('click', function(e) {
-    var id = prompt("Enter Room ID", "12 char ID");
-    switchInstance(id);
+    var new_instance_id = makeid(12);
+    document.location.search = new_instance_id;
+    const queryString = window.location.search;
+    
   });
   function removeDiv(){
       $(this).parent('div').remove();
